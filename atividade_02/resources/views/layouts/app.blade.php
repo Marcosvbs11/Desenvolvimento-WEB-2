@@ -71,6 +71,10 @@
                 </div>
             </div>
         </nav>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
 
         <main class="py-4">
             @yield('content')

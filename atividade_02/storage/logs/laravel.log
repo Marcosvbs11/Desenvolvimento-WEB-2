@@ -785,3 +785,16 @@
 #21 {main}
 "} 
 >>>>>>> 2ed18672a2c19e63b86ca7362c14d60034cf868f
+[2025-06-14 02:39:30] production.ERROR: syntax error, unexpected token "public", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"public\", expecting end of file at /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/app/Providers/AppServiceProvider.php:8)
+[stacktrace]
+#0 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(52): class_exists()
+#3 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(34): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->mergeAdditionalProviders()
+#4 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(341): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#5 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith()
+#6 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 /home/dido_e_ju/DesenvolvimentoWEB2/atividade_02/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
+#9 {main}
+"} 
