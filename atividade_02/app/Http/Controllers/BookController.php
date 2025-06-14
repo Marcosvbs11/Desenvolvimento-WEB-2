@@ -1,56 +1,60 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    // Formulário com inpu
+    // Exibir lista de livros com paginação e autores (index)
+    public function index()
+    {
+        $books = Book::with('author')->paginate(20);
+
+        return view('books.index', compact('books'));
+    }
+
+    // Mostrar um livro (show), carregando relações e usuários para empréstimo
+    public function show(Book $book)
+    {
+        $book->load(['author', 'publisher', 'category']);
+
+        $users = User::all();
+
+        return view('books.show', compact('book', 'users'));
+    }
+
+    // Formulário para edição do livro
     public function edit(Book $book)
-{
-    $publishers = Publisher::all();
-    $authors = Author::all();
-    $categories = Category::all();
+    {
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $categories = Category::all();
 
-    return view('books.edit', compact('book', 'publishers', 'authors', 'categories'));
-}
-public function show(Book $book)
-{
-    // Carregando autor, editora e categoria do livro com eager loading
-    $book->load(['author', 'publisher', 'category']);
+        return view('books.edit', compact('book', 'publishers', 'authors', 'categories'));
+    }
 
-    return view('books.show', compact('book'));
+    // Atualizar o livro
+    public function update(Request $request, Book $book)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'publisher_id' => 'required|exists:publishers,id',
+            'author_id' => 'required|exists:authors,id',
+            'category_id' => 'required|exists:categories,id',
+        ]);
 
-}
-public function index()
-{
-    // Carregar os livros com autores usando eager loading e paginação
-    $books = Book::with('author')->paginate(20);
+        $book->update($request->all());
 
-    return view('books.index', compact('books'));
+        return redirect()->route('books.index')->with('success', 'Livro atualizado com sucesso.');
+    }
 
-}
-
-
-
-
-public function update(Request $request, Book $book)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'publisher_id' => 'required|exists:publishers,id',
-        'author_id' => 'required|exists:authors,id',
-        'category_id' => 'required|exists:categories,id',
-    ]);
-
-    $book->update($request->all());
-
-    return redirect()->route('books.index')->with('success', 'Livro atualizado com sucesso.');
-}
+    // Formulário para criar livro com input de ID
     public function createWithId()
     {
         return view('books.create-id');
@@ -71,7 +75,7 @@ public function update(Request $request, Book $book)
         return redirect()->route('books.index')->with('success', 'Livro criado com sucesso.');
     }
 
-    // Formulário com input select
+    // Formulário para criar livro com select
     public function createWithSelect()
     {
         $publishers = Publisher::all();
@@ -96,5 +100,3 @@ public function update(Request $request, Book $book)
         return redirect()->route('books.index')->with('success', 'Livro criado com sucesso.');
     }
 }
-
-
